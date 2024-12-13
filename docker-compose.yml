@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  dnsmasq:
+    container_name: dnsmasq
+    image: strm/dnsmasq
+    volumes:
+      - /share/CACHEDEV1_DATA/Container/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
+    ports:
+      - 53:53/udp
+    cap_add:
+      - NET_ADMIN
+    networks:
+      default:
+        ipv4_address: 172.16.1.1
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: "172.16.0.0/23"
+          ip_range: "172.16.0.0/24"
